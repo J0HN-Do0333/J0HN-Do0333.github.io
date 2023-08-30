@@ -1,156 +1,814 @@
 <style>
-body {
-  background: #ffea92;
-  margin: 0;
-  font-family: "Open Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
-  color: #fff;
-  padding-left: 240px;
-}
-main {
-  position: relative;
-  height: 100vh;
-}
-main .helper {
-  background: rgba(0, 0, 0, 0.2);
-  color: #ffea92;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0);
-  padding: 1.2em 2em;
-  text-align: center;
-  border-radius: 20px;
-  font-size: 2em;
-  font-weight: bold;
-}
-main .helper span {
-  color: rgba(0, 0, 0, 0.2);
-  font-size: 0.4em;
-  display: block;
-}
-.menu {
-  background: #5bc995;
-  height: 100vh;
-  width: 240px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 5;
-  outline: none;
-}
-.menu .avatar {
-  background: rgba(0, 0, 0, 0.1);
-  padding: 2em 0.5em;
-  text-align: center;
-}
-.menu .avatar img {
-  width: 100px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 4px solid #ffea92;
-  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
-}
-.menu .avatar h2 {
-  font-weight: normal;
-  margin-bottom: 0;
-}
-.menu ul {
-  list-style: none;
-  padding: 0.5em 0;
-  margin: 0;
-}
-.menu ul li {
-  padding: 0.5em 1em 0.5em 3em;
-  font-size: 0.95em;
-  font-weight: regular;
-  background-repeat: no-repeat;
-  background-position: left 15px center;
-  background-size: auto 20px;
-  transition: all 0.15s linear;
-  cursor: pointer;
-}
-.menu ul li.icon-dashboard {
-  background-image: url("http://www.entypo.com/images//gauge.svg");
-}
-.menu ul li.icon-customers {
-  background-image: url("http://www.entypo.com/images//briefcase.svg");
-}
-.menu ul li.icon-users {
-  background-image: url("http://www.entypo.com/images//users.svg");
-}
-.menu ul li.icon-settings {
-  background-image: url("http://www.entypo.com/images//tools.svg");
-}
-.menu ul li:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-.menu ul li:focus {
-  outline: none;
+  @charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,400italic);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css);
+html {
+  box-sizing: border-box;
 }
 
-@media screen and (max-width: 900px) {
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  background: #f1f2f7;
+  font-family: "Open Sans", arial, sans-serif;
+  color: darkslategray;
+}
+
+body.login {
+  background-color: white;
+  max-width: 500px;
+  margin: 10vh auto;
+  padding: 1em;
+  height: auto;
+}
+
+.warn {
+  color: red;
+}
+
+/* header */
+header[role="banner"] {
+  background: white;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+}
+header[role="banner"] h1 {
+  margin: 0;
+  font-weight: 300;
+  padding: 1rem;
+}
+header[role="banner"] h1:before {
+  content: "\f248";
+  font-family: FontAwesome;
+  padding-right: 0.6em;
+  color: red;
+}
+header[role="banner"] .utilities {
+  width: 100%;
+  background: slategray;
+  color: #ddd;
+}
+header[role="banner"] .utilities li {
+  border-bottom: solid 1px rgba(255, 255, 255, 0.2);
+}
+header[role="banner"] .utilities li a {
+  padding: 0.7em;
+  display: block;
+}
+
+/* header */
+.utilities a:before {
+  content: "\f248";
+  font-family: FontAwesome;
+  padding-right: 0.6em;
+}
+
+.logout a:before {
+  content: "";
+}
+
+.users a:before {
+  content: "";
+}
+
+nav[role="navigation"] {
+  background: #2a3542;
+  color: #ddd;
+  /* icons */
+}
+nav[role="navigation"] li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+nav[role="navigation"] li a {
+  color: #ddd;
+  text-decoration: none;
+  display: block;
+  padding: 0.7em;
+}
+nav[role="navigation"] li a:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+nav[role="navigation"] li a:before {
+  content: "\f248";
+  font-family: FontAwesome;
+  padding-right: 0.6em;
+}
+nav[role="navigation"] .dashboard a:before {
+  content: "";
+}
+nav[role="navigation"] .write a:before {
+  content: "";
+}
+nav[role="navigation"] .edit a:before {
+  content: "";
+}
+nav[role="navigation"] .comments a:before {
+  content: "";
+}
+nav[role="navigation"] .users a:before {
+  content: "";
+}
+
+/* current nav item */
+.current, .dashboard .dashboard a,
+.write .write a,
+.edit .edit a,
+.comments .comments a,
+.users .users a {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+footer[role="contentinfo"] {
+  background: slategray;
+  color: #ddd;
+  font-size: 0.8em;
+  text-align: center;
+  padding: 0.2em;
+}
+
+/* panels */
+.panel {
+  background-color: white;
+  color: darkslategray;
+  -webkit-border-radius: 0.3rem;
+  -moz-border-radius: 0.3rem;
+  -ms-border-radius: 0.3rem;
+  border-radius: 0.3rem;
+  margin: 1%;
+}
+.panel > h2, .panel > ul {
+  margin: 1rem;
+}
+
+/* typography */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h2,
+h3,
+h4 {
+  font-weight: 300;
+  margin: 0;
+}
+
+h2 {
+  color: #ff1a1a;
+}
+
+b {
+  color: lightsalmon;
+}
+
+.hint {
+  color: lightslategray;
+}
+
+/* lists */
+ul,
+li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+main li {
+  position: relative;
+  padding-left: 1.2em;
+  margin: 0.5em 0;
+}
+main li:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 0;
+  top: 0.3em;
+  border-left: solid 10px #dde;
+  border-top: solid 5px transparent;
+  border-bottom: solid 5px transparent;
+}
+
+/* forms */
+form input,
+form textarea,
+form select {
+  width: 100%;
+  display: block;
+  border: solid 1px #dde;
+  padding: 0.5em;
+}
+form input:after,
+form textarea:after,
+form select:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+form input[type="checkbox"],
+form input[type="radio"] {
+  display: inline;
+  width: auto;
+}
+form label,
+form legend {
+  display: block;
+  margin: 1em 0 0.5em;
+}
+form input[type="submit"] {
+  background: #ff1a1a;
+  border: none;
+  border-bottom: solid 4px #e60000;
+  padding: 0.7em 3em;
+  margin: 1em 0;
+  color: white;
+  text-shadow: 0 -1px 0 #e60000;
+  font-size: 1.1em;
+  font-weight: bold;
+  display: inline-block;
+  width: auto;
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  -ms-border-radius: 0.5em;
+  border-radius: 0.5em;
+}
+form input[type="submit"]:hover {
+  background: turquoise;
+  border: none;
+  border-bottom: solid 4px #21ccbb;
+  padding: 0.7em 3em;
+  margin: 1em 0;
+  color: white;
+  text-shadow: 0 -1px 0 #21ccbb;
+  font-size: 1.1em;
+  font-weight: bold;
+  display: inline-block;
+  width: auto;
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  -ms-border-radius: 0.5em;
+  border-radius: 0.5em;
+}
+
+/* feedback */
+.error {
+  background-color: #ffe9e0;
+  border-color: #ffc4ad;
+}
+
+label.error {
+  padding: 0.2em 0.5em;
+}
+
+.feedback {
+  background: #fcfae6;
+  color: #857a11;
+  margin: 1em;
+  padding: 0.5em 0.5em 0.5em 2em;
+  border: solid 1px khaki;
+}
+.feedback:before {
+  content: "";
+  font-family: fontawesome;
+  color: #e4d232;
+  margin-left: -1.5em;
+  margin-right: 0.5em;
+}
+.feedback li:before {
+  border-left-color: #f6f0b9;
+}
+.feedback.error {
+  background: #ffe9e0;
+  color: #942a00;
+  margin: 1em;
+  padding: 0.5em 0.5em 0.5em 2em;
+  border: solid 1px lightsalmon;
+}
+.feedback.error:before {
+  content: "";
+  font-family: fontawesome;
+  color: #ff5714;
+  margin-left: -1.5em;
+  margin-right: 0.5em;
+}
+.feedback.error li:before {
+  border-left-color: #ffc4ad;
+}
+.feedback.success {
+  background: #98eee6;
+  color: #08322e;
+  margin: 1em;
+  padding: 0.5em 0.5em 0.5em 2em;
+  border: solid 1px turquoise;
+}
+.feedback.success:before {
+  content: "";
+  font-family: fontawesome;
+  color: #1aa093;
+  margin-left: -1.5em;
+  margin-right: 0.5em;
+}
+.feedback.success li:before {
+  border-left-color: #6ce7db;
+}
+
+/* tables */
+table {
+  border-collapse: collapse;
+  width: 96%;
+  margin: 2%;
+}
+
+th {
+  text-align: left;
+  font-weight: 400;
+  font-size: 13px;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0 10px;
+  padding-bottom: 14px;
+}
+
+tr:not(:first-child):hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+td {
+  line-height: 40px;
+  font-weight: 300;
+  padding: 0 10px;
+}
+
+@media screen and (min-width: 600px) {
+  html,
   body {
-    padding-left: 0;
+    height: 100%;
   }
-  .menu {
-    width: 230px;
-    box-shadow: 0 0 0 100em rgba(0, 0, 0, 0);
-    transform: translate3d(-230px, 0, 0);
-    transition: all 0.3s ease-in-out;
+
+  header[role="banner"] {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+    height: 75px;
   }
-  .menu .smartphone-menu-trigger {
-    width: 40px;
-    height: 40px;
+  header[role="banner"] .utilities {
     position: absolute;
-    left: 100%;
-    background: #5bc995;
+    top: 0;
+    right: 0;
+    background: transparent;
+    color: darkslategray;
+    width: auto;
   }
-  .menu .smartphone-menu-trigger:before,
-  .menu .smartphone-menu-trigger:after {
-    content: '';
-    width: 50%;
-    height: 2px;
-    background: #fff;
-    border-radius: 10px;
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate3d(-50%, -50%, 0);
+  header[role="banner"] .utilities li {
+    display: inline-block;
   }
-  .menu .smartphone-menu-trigger:after {
-    top: 55%;
-    transform: translate3d(-50%, -50%, 0);
+  header[role="banner"] .utilities li a {
+    padding: 0.5em 1em;
   }
-  .menu ul li {
-    padding: 1em 1em 1em 3em;
-    font-size: 1.2em;
+
+  nav[role="navigation"] {
+    position: fixed;
+    width: 200px;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+        border-radius: 0.5%;
   }
-  .menu:focus {
-    transform: translate3d(0, 0, 0);
-    box-shadow: 0 0 0 100em rgba(0, 0, 0, 0.6);
+
+  main[role="main"] {
+    margin: 10px 0 40px 200px;
   }
-  .menu:focus .smartphone-menu-trigger {
-    pointer-events: none;
+  main[role="main"]:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .panel {
+    margin: 2% 0 0 2%;
+    float: left;
+    width: 96%;
+  }
+  .panel:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .box, .onethird, .twothirds {
+    padding: 1rem;
+  }
+
+  .onethird {
+    width: 33.333%;
+    float: left;
+  }
+
+  .twothirds {
+    width: 66%;
+    float: left;
+  }
+
+  footer[role="contentinfo"] {
+    clear: both;
+    margin-left: 200px;
   }
 }
-  </style>
-<nav class="menu" tabindex="0">
-	<div class="smartphone-menu-trigger"></div>
-  <header class="avatar">
-		<img src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg" />
-    <h2>John D.</h2>
-  </header>
-	<ul>
-    <li tabindex="0" class="icon-dashboard"><span>Dashboard</span></li>
-    <li tabindex="0" class="icon-customers"><span>Customers</span></li>
-    <li tabindex="0" class="icon-users"><span>Users</span></li>
-    <li tabindex="0" class="icon-settings"><span>Settings</span></li>
+@media screen and (min-width: 900px) {
+  footer[role="contentinfo"] {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0px;
+    margin: 0;
+  }
+
+  .panel {
+    width: 47%;
+    clear: none;
+  }
+  .panel.important {
+    width: 96%;
+  }
+  .panel.secondary {
+    width: 23%;
+  }
+}
+
+</style>
+<nav role='navigation'>
+  <ul class="main">
+    <li class="dashboard"><a href="admindashboard">Dashboard</a></li>
+    <li class="edit"><a href="#">Edit Website</a></li>
+    <li class="write"><a href="#">Write news</a></li>
+    <li class="comments"><a href="#">Ads</a></li>
+    <li class="users"><a href="#">Manage Users</a></li>
   </ul>
 </nav>
 
-<main>
-  <div class="helper">
-    RESIZE THE WINDOW
-		<span>Breakpoints on 900px and 400px</span>
+<main role="main">
+
+  <!-- personal note that I am starting from 3 sections and this is the starting -->
+
+
+
+<div id="parallax-world-of-ugg">
+<section>
+  <div class="title">
+    <h3>Committees</h3>
+    <h1>Rbs MUN XVIII</h1>
   </div>
+</section>
+<section>
+    <div class="parallax-one">
+      <h2>AFRICAN UNION</h2>
+    </div>
+</section>
+
+<section>
+  <div class="block">
+    <h1><center>Agenda I: The "Harmonious Horizons: Sino-African Alliance for shared growth"</center></h1>
+    <br>
+    <p><span class="first-character sc">I</span>nsurgency has often been used in different contexts in the African Continent; colonial powers labeled any independence movements as a move of insurgency to maintain their control over the country. However, as time passed the way countries defined insurgency in Africa was based more around Islamic Jihadism. This was mostly due to events like the truck bombings of US Embassies in East Africa in 1998, and the 9/11 tragedy in 2001. Some reasons for the growing insurgency in this continent is due to nations having successive weak governments with rampant corruption, indemnity and disorganization..</p>
+    <p class="line-break margin-top-10"></p>
+    <p class="margin-top-10">Poorly trained and unpaid military troops have begun mutinying or deserting their forces entirely. This non-professionalism of the soldiers, whose duties have been limited to protecting state leaders, have stained their reputation in the eyes of the public. Jihadist insurgents, however, are known to offer the public with fundamental services when the government fails to do so, convincing people to join their cause using it as a moral leverage.
+
+The African Union this year will be focusing on the ongoing Boko Haram insurgency in West Africa. Since the group’s founding, Boko Haram has wreaked havoc for more than a decade now. Launching attacks on government and UN buildings in demand for the creation of an Islamic State, the organization has not taken a look back and their methods, and crimes only seem to proliferate. The committee will be expected to address how to combat the massacres, suicide bombings, mass kidnappings conducted by the organization and putting a stop to their future activities entirely.</p>
+
+  </div>
+</section>
+
+<section>
+  <div class="parallax-two">
+    <h2>DISEC</h2>
+  </div>
+</section>
+
+<section>
+  <div class="block">
+    <h1><center>DISARMAMENT & INTERNATIONAL SECURITY COMMITTE</center></h1>
+    <br>
+    <p><span class="first-character ny">W</span>elcome to the Disarmament and International Security Committee, also known as DISEC! It's like stepping into a James Bond movie, where spies, and diplomats come together to save the world. Picture yourself in a room filled with secret agents disguised as delegates, armed with their trusty laptops and diplomatic wits. The atmosphere crackles with excitement and intrigue as delegates channel their inner 007, navigating through a web of global security challenges.</p>
+    <p class="line-break margin-top-10"></p>
+  </div>
+</section>
+
+<section>
+  <div class="parallax-three">
+    <h2>SPECPOL</h2>
+  </div>
+</section>
+
+<section>
+  <div class="block">
+     <h1><center>SPECIAL POLITICAL AND DECOLONIZATION COMMITEE</center></h1>
+    <br>
+    <p><span class="first-character atw">W</span>ith the onset of a unified Yemen after years of conflict, civil war and political propaganda in 1990, Ali Abdullah Saleh rose to power and was elected the first president of unified Yemen. At this same time the Houthi forces were growing in power. Under the leadership of Hussein Badreddin al-Houthi, this group became a pioneer opposition to the Saleh regime, accusing the powerholder of being corrupt and “Saudi influenced” as all his decisions were accused to have been made to please the west.</p>
+    <p class="line-break margin-top-10"></p>
+  </div>
+</section>
+
+</div>
+<style>
+@import url(https://fonts.googleapis.com/css?family=Oswald:300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic);
+
+/* Override UGG site */
+#main {width: 100%; padding:0;}
+.content-asset p {margin:0 auto;}
+.breadcrumb {display:none;}
+
+/* Helpers */
+/**************************/
+.margin-top-10 {padding-top:10px;}
+.margin-bot-10 {padding-bottom:10px;}
+
+/* Typography */
+/**************************/
+#parallax-world-of-ugg h1 {font-family:'Oswald', sans-serif; font-size:24px; font-weight:400; text-transform: uppercase; color:black; padding:0; margin:0;}
+#parallax-world-of-ugg h2 {font-family:'Oswald', sans-serif; font-size:70px; letter-spacing:10px; text-align:center; color:white; font-weight:400; text-transform:uppercase; z-index:10; opacity:.9;}
+#parallax-world-of-ugg h3 {font-family:'Oswald', sans-serif; font-size:14px; line-height:0; font-weight:400; letter-spacing:8px; text-transform: uppercase; color:black;}
+#parallax-world-of-ugg p {font-family:'Source Sans Pro', sans-serif; font-weight:400; font-size:14px; line-height:24px;}
+.first-character {font-weight:400; float: left; font-size: 84px; line-height: 64px; padding-top: 4px; padding-right: 8px; padding-left: 3px; font-family: 'Source Sans Pro', sans-serif;}
+
+.sc {color: #3b8595;}
+.ny {color: #3d3c3a;}
+.atw {color: #c48660;}
+
+/* Section - Title */
+/**************************/
+#parallax-world-of-ugg .title {background: white; padding: 60px; margin:0 auto; text-align:center;}
+#parallax-world-of-ugg .title h1 {font-size:35px; letter-spacing:8px;}
+
+/* Section - Block */
+/**************************/
+#parallax-world-of-ugg .block {background: white; padding: 60px; width:820px; margin:0 auto; text-align:justify;}
+#parallax-world-of-ugg .block-gray {background: #f2f2f2;padding: 60px;}
+#parallax-world-of-ugg .section-overlay-mask {position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: black; opacity: 0.70;}
+
+/* Section - Parallax */
+/**************************/
+#parallax-world-of-ugg .parallax-one {padding-top: 200px; padding-bottom: 200px; overflow: hidden; position: relative; width: 100%; background-image: url(https://upload.wikimedia.org/wikipedia/commons/f/f6/On_night_operations_with_the_African_Union_Mission_in_Somalia_09_%288232220502%29.jpg?dpr=1&auto=format&fit=crop&w=1500&h=938&q=80&cs=tinysrgb&crop=); background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: top center;}
+#parallax-world-of-ugg .parallax-two {padding-top: 200px; padding-bottom: 200px; overflow: hidden; position: relative; width: 100%; background-image: url(https://iispmun.com/wp-content/uploads/2023/06/DISEC.jpg?dpr=1&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=); background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: center center;}
+#parallax-world-of-ugg .parallax-three {padding-top: 200px; padding-bottom: 200px; overflow: hidden; position: relative; width: 100%; background-image: url(https://images.squarespace-cdn.com/content/v1/60c0349822ae60116ad77545/2bea8fe8-60d4-4537-9161-8da65b66c5f1/iStock-1169552689.jpeg?dpr=1&auto=format&fit=crop&w=1500&h=1001&q=80&cs=tinysrgb&crop=); background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: center center;}
+
+/* Extras */
+/**************************/
+#parallax-world-of-ugg .line-break {border-bottom:1px solid black; width: 150px; margin:0 auto;}
+
+/* Media Queries */
+/**************************/
+@media screen and (max-width: 959px) and (min-width: 768px) {
+  #parallax-world-of-ugg .block {padding: 40px}
+}
+@media screen and (max-width: 767px) {
+  #parallax-world-of-ugg .block {padding: 30px}
+  #parallax-world-of-ugg h2 {font-size:30px;}
+  #parallax-world-of-ugg .block {padding: 30px;}
+  #parallax-world-of-ugg .parallax-one, #parallax-world-of-ugg .parallax-two, #parallax-world-of-ugg .parallax-three {padding-top:100px; padding-bottom:100px;}
+}
+@media screen and (max-width: 479px) {
+  #parallax-world-of-ugg .block {padding: 30px 15px;}
+}
+</style>
+
+
+<!-- just comment for me, i am starting from here -->
+
+<div id="parallax-world-of-ugg">
+<section>
+    <div class="parallax-four">
+      <h2>FEDERAL PARLIAMENT OF NEPAL</h2>
+    </div>
+</section>
+
+<section>
+  <div class="block">
+    <h1><center>प्रतिनिधि सभा </center></h1>
+    <br>
+    <p><span class="first-character sc">I</span>nsurgency has often been used in different contexts in the African Continent; colonial powers labeled any independence movements as a move of insurgency to maintain their control over the country. However, as time passed the way countries defined insurgency in Africa was based more around Islamic Jihadism. This was mostly due to events like the truck bombings of US Embassies in East Africa in 1998, and the 9/11 tragedy in 2001. Some reasons for the growing insurgency in this continent is due to nations having successive weak governments with rampant corruption, indemnity and disorganization..</p>
+    <p class="line-break margin-top-10"></p>
+  </div>
+</section>
+
+<section>
+  <div class="parallax-five">
+    <h2>SECURITY COUNCIL</h2>
+  </div>
+</section>
+
+<section>
+  <div class="block">
+    <h1><center>UNITED NATIONS SECURITY COUNCIL</center></h1>
+    <br>
+    <p><span class="first-character ny">W</span>elcome to the Disarmament and International Security Committee, also known as DISEC! It's like stepping into a James Bond movie, where spies, and diplomats come together to save the world. Picture yourself in a room filled with secret agents disguised as delegates, armed with their trusty laptops and diplomatic wits. The atmosphere crackles with excitement and intrigue as delegates channel their inner 007, navigating through a web of global security challenges.</p>
+    <p class="line-break margin-top-10"></p>
+  </div>
+</section>
+
+<section>
+  <div class="parallax-six">
+    <h2>IMT</h2>
+  </div>
+</section>
+
+<section>
+  <div class="block">
+  <h1><center>INTERNATIONAL MILITARY TURBINAL</center></h1>
+    <br>
+    <p><span class="first-character atw">W</span>ith the onset of a unified Yemen after years of conflict, civil war and political propaganda in 1990, Ali Abdullah Saleh rose to power and was elected the first president of unified Yemen. At this same time the Houthi forces were growing in power. Under the leadership of Hussein Badreddin al-Houthi, this group became a pioneer opposition to the Saleh regime, accusing the powerholder of being corrupt and “Saudi influenced” as all his decisions were accused to have been made to please the west.</p>
+    <p class="line-break margin-top-10"></p>
+  </div>
+</section>
+
+</div>
+<style>
+@import url(https://fonts.googleapis.com/css?family=Oswald:300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic);
+
+/* Override UGG site */
+#main {width: 100%; padding:0;}
+.content-asset p {margin:0 auto;}
+.breadcrumb {display:none;}
+
+/* Helpers */
+/**************************/
+.margin-top-10 {padding-top:10px;}
+.margin-bot-10 {padding-bottom:10px;}
+
+/* Typography */
+/**************************/
+#parallax-world-of-ugg h1 {font-family:'Oswald', sans-serif; font-size:24px; font-weight:400; text-transform: uppercase; color:black; padding:0; margin:0;}
+#parallax-world-of-ugg h2 {font-family:'Oswald', sans-serif; font-size:70px; letter-spacing:10px; text-align:center; color:white; font-weight:400; text-transform:uppercase; z-index:10; opacity:.9;}
+#parallax-world-of-ugg h3 {font-family:'Oswald', sans-serif; font-size:14px; line-height:0; font-weight:400; letter-spacing:8px; text-transform: uppercase; color:black;}
+#parallax-world-of-ugg p {font-family:'Source Sans Pro', sans-serif; font-weight:400; font-size:14px; line-height:24px;}
+.first-character {font-weight:400; float: left; font-size: 84px; line-height: 64px; padding-top: 4px; padding-right: 8px; padding-left: 3px; font-family: 'Source Sans Pro', sans-serif;}
+
+.sc {color: #3b8595;}
+.ny {color: #3d3c3a;}
+.atw {color: #c48660;}
+
+/* Section - Title */
+/**************************/
+#parallax-world-of-ugg .title {background: white; padding: 60px; margin:0 auto; text-align:center;}
+#parallax-world-of-ugg .title h1 {font-size:35px; letter-spacing:8px;}
+
+/* Section - Block */
+/**************************/
+#parallax-world-of-ugg .block {background: white; padding: 60px; width:100%; margin:0 auto; text-align:justify;}
+#parallax-world-of-ugg .block-gray {background: #f2f2f2;padding: 60px;}
+#parallax-world-of-ugg .section-overlay-mask {position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: black; opacity: 0.70;}
+
+/* Section - Parallax */
+/**************************/
+#parallax-world-of-ugg .parallax-four {padding-top: 200px; padding-bottom: 200px; overflow: hidden; position: relative; width: 100%; background-image: url(https://assets-cdn.kathmandupost.com/uploads/source/news/2019/politics/Federal-Parliament.JPG?dpr=1&auto=format&fit=crop&w=1500&h=938&q=80&cs=tinysrgb&crop=); background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: top center;}
+#parallax-world-of-ugg .parallax-five {padding-top: 200px; padding-bottom: 200px; overflow: hidden; position: relative; width: 100%; background-image: url(https://cdn.cfr.org/sites/default/files/styles/immersive_image_3_2_desktop_2x/public/image/2020/09/rtr3hsmz.jpg.webp?dpr=1&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=); background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: center center;}
+#parallax-world-of-ugg .parallax-six {padding-top: 200px; padding-bottom: 200px; overflow: hidden; position: relative; width: 100%; background-image: url(https://www.roberthjackson.org/wp-content/uploads/2021/02/Jackson-Day-Banner.png?dpr=1&auto=format&fit=crop&w=1500&h=1001&q=80&cs=tinysrgb&crop=); background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: center center;}
+
+/* Extras */
+/**************************/
+#parallax-world-of-ugg .line-break {border-bottom:1px solid black; width: 150px; margin:0 auto;}
+
+/* Media Queries */
+/**************************/
+@media screen and (max-width: 959px) and (min-width: 768px) {
+  #parallax-world-of-ugg .block {padding: 40px; width:620px;}
+}
+@media screen and (max-width: 767px) {
+  #parallax-world-of-ugg .block {padding: 30px; width:420px;}
+  #parallax-world-of-ugg h2 {font-size:30px;}
+  #parallax-world-of-ugg .block {padding: 30px;}
+  #parallax-world-of-ugg .parallax-four, #parallax-world-of-ugg .parallax-five, #parallax-world-of-ugg .parallax-six {padding-top:100px; padding-bottom:100px;}
+}
+@media screen and (max-width: 479px) {
+  #parallax-world-of-ugg .block {padding: 30px 15px; width:290px;}
+}
+</style>
+
+
+
+
+
+<!-- just for note that i am starting another committee from here -->
+
+
+
+<div id="parallax-world-of-ugg">
+  <section>
+    <div class="parallax-seven">
+      <h2> ECOFIN </h2>
+    </div>
+</section>
+
+<section>
+  <div class="block">
+    <h1><center>ECONOMIC AND FINANCIAL AFFAIRS COUNCIL</center></h1>
+    <br>
+    <p><span class="first-character sc">I</span>n 1978, Brian Smith landed in Southern California with a bag of sheepskin boots and hope. He fell in love with the sheepskin experience and was convinced the world would one day share this love. The beaches of Southern California had long been an epicenter of a relaxed, casual lifestyle, a lifestyle that Brian felt was a perfect fit for his brand. So he founded the UGG brand, began selling his sheepskin boots and they were an immediate sensation. By the mid 1980's, the UGG brand became a symbol of relaxed southern California culture, gaining momentum through surf shops and other shops up and down the coast of California, from San Diego to Santa Cruz. UGG boots reached beyond the beach, popping up in big cities and small towns all over, and in every level of society. Girls wore their surfer boyfriend's pair of UGG boots like a letterman jacket. When winter came along, UGG boots were in ski shops and were seen in lodges from Mammoth to Aspen.</p>
+    <p class="line-break margin-top-10"></p>
+  </div>
+</section>
+
+<section>
+  <div class="parallax-eight">
+    <h2>TCC</h2>
+  </div>
+</section>
+
+<section>
+  <div class="block">
+    <h1><center>TRIPLE CRISIS COMMITEE</center></h1>
+    <br>
+    <p><span class="first-character ny">B</span>reaking into the New York fashion world is no easy task. But by the early 2000's, UGG Australia began to take it by storm. The evolution of UGG from a brand that made sheepskin boots, slippers, clogs and sandals for an active, outdoor lifestyle to a brand that was now being touted as a symbol of a stylish, casual and luxurious lifestyle was swift. Much of this was due to a brand repositioning effort that transformed UGG into a high-end luxury footwear maker. As a fashion brand, UGG advertisements now graced the pages of Vogue Magazine as well as other fashion books. In the mid 2000's, the desire for premium casual fashion was popping up all over the world and UGG was now perfectly aligned with this movement.</p>
+    <p class="line-break margin-top-10"></p>
+    <p class="margin-top-10">Fueled by celebrities from coast to coast wearing UGG boots and slippers on their downtime, an entirely new era of fashion was carved out. As a result, the desire and love for UGG increased as people wanted to go deeper into this relaxed UGG experience. UGG began offering numerous color and style variations on their sheepskin boots and slippers. Cold weather boots for women and men and leather casuals were added with great success. What started as a niche item, UGG sheepskin boots were now a must-have staple in everyone's wardrobe. More UGG collections followed, showcasing everything from knit boots to sneakers to wedges, all the while maintaining that luxurious feel UGG is known for all over the world. UGG products were now seen on runways and in fashion shoots from coast to coast. Before long, the love spread even further.</p>
+  </div>
+</section>
+
+<section>
+  <div class="parallax-nine">
+    <h2>CSTD</h2>
+  </div>
+</section>
+
+<section>
+  <div class="block">
+    <h1><center>THE UNITED NATION COMMISSION ON SCIENCE AND TECHNOLOGY FOR DEVELOPMENT</center></h1>
+    <br>
+    <p><span class="first-character atw">W</span>hen the New York fashion community notices your brand, the world soon follows. The widespread love for UGG extended to Europe in the mid-2000's along with the stylish casual movement and demand for premium casual fashion. UGG boots and shoes were now seen walking the streets of London, Paris and Amsterdam with regularity. To meet the rising demand from new fans, UGG opened flagship stores in the UK and an additional location in Moscow. As the love spread farther East, concept stores were opened in Beijing, Shanghai and Tokyo. UGG Australia is now an international brand that is loved by all. This love is a result of a magical combination of the amazing functional benefits of sheepskin and the heightened emotional feeling you get when you slip them on your feet. In short, you just feel better all over when you wear UGG boots, slippers, and shoes.</p>
+    <p class="line-break margin-top-10"></p>
+    <p class="margin-top-10">In 2011, UGG will go back to its roots and focus on bringing the active men that brought the brand to life back with new styles allowing them to love the brand again as well. Partnering with Super Bowl champion and NFL MVP Tom Brady, UGG will invite even more men to feel the love the rest of the world knows so well. UGG will also step into the world of high fashion with UGG Collection. The UGG Collection fuses the timeless craft of Italian shoemaking with the reliable magic of sheepskin, bringing the luxurious feel of UGG to high end fashion. As the love for UGG continues to spread across the world, we have continued to offer new and unexpected ways to experience the brand. The UGG journey continues on and the love for UGG continues to spread.</p>
+  </div>
+</section>
+
+</div>
+<style>
+  @import url(https://fonts.googleapis.com/css?family=Oswald:300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic);
+
+/* Override UGG site */
+#main {width: 100%; padding:0;}
+.content-asset p {margin:0 auto;}
+.breadcrumb {display:none;}
+
+/* Helpers */
+/**************************/
+.margin-top-10 {padding-top:10px;}
+.margin-bot-10 {padding-bottom:10px;}
+
+/* Typography */
+/**************************/
+#parallax-world-of-ugg h1 {font-family:'Oswald', sans-serif; font-size:24px; font-weight:400; text-transform: uppercase; color:black; padding:0; margin:0;}
+#parallax-world-of-ugg h2 {font-family:'Oswald', sans-serif; font-size:70px; letter-spacing:10px; text-align:center; color:white; font-weight:400; text-transform:uppercase; z-index:10; opacity:.9;}
+#parallax-world-of-ugg h3 {font-family:'Oswald', sans-serif; font-size:14px; line-height:0; font-weight:400; letter-spacing:8px; text-transform: uppercase; color:black;}
+#parallax-world-of-ugg p {font-family:'Source Sans Pro', sans-serif; font-weight:400; font-size:14px; line-height:24px;}
+.first-character {font-weight:400; float: left; font-size: 84px; line-height: 64px; padding-top: 4px; padding-right: 8px; padding-left: 3px; font-family: 'Source Sans Pro', sans-serif;}
+
+.sc {color: #3b8595;}
+.ny {color: #3d3c3a;}
+.atw {color: #c48660;}
+
+/* Section - Title */
+/**************************/
+#parallax-world-of-ugg .title {background: white; padding: 60px; margin:0 auto; text-align:center;}
+#parallax-world-of-ugg .title h1 {font-size:35px; letter-spacing:8px;}
+
+/* Section - Block */
+/**************************/
+#parallax-world-of-ugg .block {background: white; padding: 60px; width:100%; margin:0 auto; text-align:justify;}
+#parallax-world-of-ugg .block-gray {background: #f2f2f2;padding: 60px;}
+#parallax-world-of-ugg .section-overlay-mask {position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: black; opacity: 0.70;}
+
+/* Section - Parallax */
+/**************************/
+#parallax-world-of-ugg .parallax-seven {padding-top: 200px; padding-bottom: 200px; overflow: hidden; position: relative; width: 100%; background-image: url(https://ec.europa.eu/eurostat/documents/4187653/14185667/ECOFIN+2022.jpg/80bd1eb5-3b24-5b7a-0b9c-5c7144deceda?t=1668598315586?dpr=1&auto=format&fit=crop&w=1500&h=938&q=80&cs=tinysrgb&crop=); background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: top center;}
+#parallax-world-of-ugg .parallax-eight {padding-top: 200px; padding-bottom: 200px; overflow: hidden; position: relative; width: 100%; background-image: url(https://assets.editorial.aetnd.com/uploads/2009/10/adolf-hitler-gettyimages-119505258.jpg?dpr=1&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=); background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: center center;}
+#parallax-world-of-ugg .parallax-nine {padding-top: 200px; padding-bottom: 200px; overflow: hidden; position: relative; width: 100%; background-image: url(https://www.diplomatic-council.org/sites/default/files/2019-04/1024px-United_Nations_Flags_-_cropped.jpg?dpr=1&auto=format&fit=crop&w=1500&h=1001&q=80&cs=tinysrgb&crop=); background-attachment: fixed; background-size: cover; -moz-background-size: cover; -webkit-background-size: cover; background-repeat: no-repeat; background-position: center center;}
+
+/* Extras */
+/**************************/
+#parallax-world-of-ugg .line-break {border-bottom:1px solid black; width: 150px; margin:0 auto;}
+
+/* Media Queries */
+/**************************/
+@media screen and (max-width: 959px) and (min-width: 768px) {
+  #parallax-world-of-ugg .block {padding: 40px}
+}
+@media screen and (max-width: 767px) {
+  #parallax-world-of-ugg .block {padding: 30px;}
+  #parallax-world-of-ugg h2 {font-size:30px;}
+  #parallax-world-of-ugg .block {padding: 30px;}
+  #parallax-world-of-ugg .parallax-seven, #parallax-world-of-ugg .parallax-eight, #parallax-world-of-ugg .parallax-nine {padding-top:100px; padding-bottom:100px;}
+}
+@media screen and (max-width: 479px) {
+  #parallax-world-of-ugg .block {padding: 30px 15px; }
+}
+</style>
+
 </main>
