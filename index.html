@@ -7,7 +7,6 @@ body {
 }
 
 section, header, footer {
-  height: 100vh;
   position: relative;
 }
 section.half, header.half, footer.half {
@@ -79,15 +78,15 @@ nav ul li.middle {
 <nav>
   <ul class="navbar"></ul>
 </nav>
-<section data-name="African Union" style="height:129vh">
+<section data-name="African Union" style="">
   <div id="parallax-world-of-ugg">
-<div style="     width:80%;padding-left:10%;">
+<div class="content_div">
     <div class="parallax-one">
       <h2>AFRICAN UNION</h2>
     </div>
 </div>
 
-<div style="   width:80%;padding-left:10%;">
+<div class="content_div">
   <div class="block">
     <h1><center>Agenda I: The "Harmonious Horizons: Sino-African Alliance for shared growth"</center></h1>
     <br>
@@ -101,15 +100,15 @@ The African Union this year will be focusing on the ongoing Boko Haram insurgenc
 </div>
 </div>
 </section>
-<section data-name="African Union" style="height:129vh">
+<section data-name="African Union" style="">
   <div id="parallax-world-of-ugg">
-<div style="     width:80%;padding-left:10%;">
+<div class="content_div">
     <div class="parallax-one">
       <h2>AFRICAN UNION</h2>
     </div>
 </div>
 
-<div style="   width:80%;padding-left:10%;">
+<div class="content_div">
   <div class="block">
     <h1><center>Agenda I: The "Harmonious Horizons: Sino-African Alliance for shared growth"</center></h1>
     <br>
@@ -123,15 +122,15 @@ The African Union this year will be focusing on the ongoing Boko Haram insurgenc
 </div>
 </div>
 </section>
-<section data-name="African Union" style="height:129vh">
+<section data-name="African Union" style="">
   <div id="parallax-world-of-ugg">
-<div style="     width:80%;padding-left:10%;">
+<div class="content_div">
     <div class="parallax-one">
       <h2>AFRICAN UNION</h2>
     </div>
 </div>
 
-<div style="   width:80%;padding-left:10%;">
+<div class="content_div">
   <div class="block">
     <h1><center>Agenda I: The "Harmonious Horizons: Sino-African Alliance for shared growth"</center></h1>
     <br>
@@ -145,15 +144,15 @@ The African Union this year will be focusing on the ongoing Boko Haram insurgenc
 </div>
 </div>
 </section>
-<section data-name="African Union" style="height:129vh">
+<section data-name="African Union" style="">
   <div id="parallax-world-of-ugg">
-<div style="     width:80%;padding-left:10%;">
+<div class="content_div">
     <div class="parallax-one">
       <h2>AFRICAN UNION</h2>
     </div>
 </div>
 
-<div style="   width:80%;padding-left:10%;">
+<div class="content_div">
   <div class="block">
     <h1><center>Agenda I: The "Harmonious Horizons: Sino-African Alliance for shared growth"</center></h1>
     <br>
@@ -238,6 +237,10 @@ $('[data-number]').on('click touchstart', function(e){
 #parallax-world-of-ugg{
       background: #f1f2f7;
 }
+.content_div{
+ width:80%;
+ padding-left:10%;
+}
 /* Override UGG site */
 #main {width: 100%; padding:0;}
 .content-asset p {margin:0 auto;}
@@ -269,7 +272,7 @@ body{
 
 /* Section - Block */
 /**************************/
-#parallax-world-of-ugg .block {background: white; padding: 60px; width:820px; margin:0 auto; text-align:justify;}
+#parallax-world-of-ugg .block {background: white; padding: 60px; margin:0 auto; text-align:justify;}
 #parallax-world-of-ugg .block-gray {background: #f2f2f2;padding: 60px;}
 #parallax-world-of-ugg .section-overlay-mask {position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: black; opacity: 0.70;}
 
@@ -292,15 +295,35 @@ body{
 /* Media Queries */
 /**************************/
 @media screen and (max-width: 959px) and (min-width: 768px) {
-  #parallax-world-of-ugg .block {padding: 40px; width:620px;}
+  #parallax-world-of-ugg .block {padding: 40px}
 }
 @media screen and (max-width: 767px) {
-  #parallax-world-of-ugg .block {padding: 30px; width:420px;}
+  #parallax-world-of-ugg .block {padding: 30px}
   #parallax-world-of-ugg h2 {font-size:30px;}
   #parallax-world-of-ugg .block {padding: 30px;}
   #parallax-world-of-ugg .parallax-one, #parallax-world-of-ugg .parallax-two, #parallax-world-of-ugg .parallax-three {padding-top:100px; padding-bottom:100px;}
+
+
 }
 @media screen and (max-width: 479px) {
-  #parallax-world-of-ugg .block {padding: 30px 15px; width:290px;}
+  #parallax-world-of-ugg .block {padding: 30px 15px}
 }
+
+@media screen and (max-width: 1100px){
+  .content_div{
+      width:75%;
+  }
+  nav ul li{
+  font-size:2em;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .content_div {
+    width: 70%;
+  }
+  nav ul li {
+    font-size: 2.5em;
+  }
+}
+
 </style>
